@@ -32,7 +32,6 @@ class ArticleFactory extends Factory
             'status' => $this->faker->randomElement(["PUBLISHED","DRAFT"]),
             'date' => $this->faker->date(),
             'featured' => $this->faker->boolean,
-            'softdeletes' => $this->faker->word,
         ];
     }
 }
