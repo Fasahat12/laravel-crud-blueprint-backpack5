@@ -41,7 +41,8 @@ class TagCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('slug');
-        CRUD::column('timestamp');
+        CRUD::column('created_at');
+        CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -62,7 +63,6 @@ class TagCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('slug');
-        CRUD::field('timestamp');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

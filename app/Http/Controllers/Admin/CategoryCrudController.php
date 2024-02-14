@@ -18,6 +18,7 @@ class CategoryCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -39,12 +40,10 @@ class CategoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('parent_id');
-        CRUD::column('lft');
-        CRUD::column('rgt');
-        CRUD::column('depth');
         CRUD::column('name');
         CRUD::column('slug');
+        CRUD::column('created_at');
+        CRUD::column('updated_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -64,9 +63,6 @@ class CategoryCrudController extends CrudController
         CRUD::setValidation(CategoryRequest::class);
 
         CRUD::field('parent_id');
-        CRUD::field('lft');
-        CRUD::field('rgt');
-        CRUD::field('depth');
         CRUD::field('name');
         CRUD::field('slug');
 
@@ -86,5 +82,19 @@ class CategoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    /**
+     * Provides an interface to reorder & nest elements
+     * 
+     * @see https://backpackforlaravel.com/docs/5.x/crud-api#reorder-operation
+     * @return void
+     */
+    protected function setupReorderOperation()
+    {
+        // which model attribute to use for labels
+        $this->crud->set('reorder.label', 'name');
+        // maximum nesting depth; this example will prevent the user from creating trees deeper than 3 levels;
+        $this->crud->set('reorder.max_level', 4);
     }
 }

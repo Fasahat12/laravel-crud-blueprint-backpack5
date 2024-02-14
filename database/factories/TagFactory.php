@@ -25,7 +25,6 @@ class TagFactory extends Factory
         return [
             'name' => $this->faker->name,
             'slug' => $this->faker->slug,
-            'timestamp' => $this->faker->word,
             'softdeletes' => $this->faker->word,
         ];
     }

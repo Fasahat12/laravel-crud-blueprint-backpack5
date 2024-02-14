@@ -28,7 +28,7 @@ models:
   Tag:
     name: string
     slug: string unique
-    timestamp: true
+    timestamps: true
     softDeletes: true
     relationships:
       belongsToMany: Article

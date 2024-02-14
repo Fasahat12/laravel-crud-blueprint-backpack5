@@ -2,10 +2,10 @@ created:
     - database/factories/CategoryFactory.php
     - database/factories/ArticleFactory.php
     - database/factories/TagFactory.php
-    - database/migrations/2024_02_13_133009_create_categories_table.php
-    - database/migrations/2024_02_13_133010_create_articles_table.php
-    - database/migrations/2024_02_13_133011_create_tags_table.php
-    - database/migrations/2024_02_13_133012_create_article_tag_table.php
+    - database/migrations/2024_02_14_060723_create_categories_table.php
+    - database/migrations/2024_02_14_060724_create_articles_table.php
+    - database/migrations/2024_02_14_060725_create_tags_table.php
+    - database/migrations/2024_02_14_060726_create_article_tag_table.php
     - app/Models/Category.php
     - app/Models/Article.php
     - app/Models/Tag.php
@@ -13,6 +13,7 @@ created:
     - database/seeders/CategorySeeder.php
     - database/seeders/TagSeeder.php
 models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
     Category: { parent_id: 'id foreign:categories nullable', lft: 'integer unsigned nullable', rgt: 'integer unsigned nullable', depth: 'integer unsigned nullable', name: string, slug: 'string unique', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Article } }
     Article: { category_id: 'id foreign', title: string, slug: 'string unique default:''''', content: text, image: 'string nullable', status: 'enum:PUBLISHED,DRAFT', date: date, featured: 'boolean default:0', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Tag } }
-    Tag: { name: string, slug: 'string unique', timestamp: true, softdeletes: softDeletes, relationships: { belongsToMany: Article } }
+    Tag: { name: string, slug: 'string unique', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Article } }
