@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Backpack\CRUD\app\Library\Widget;
 use App\Http\Requests\CategoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -30,6 +31,32 @@ class CategoryCrudController extends CrudController
         CRUD::setModel(\App\Models\Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
         CRUD::setEntityNameStrings('category', 'categories');
+
+        /* To Add Custom CRUD Routes */
+        
+        // $this->crud->setEditView('test');
+        // $this->crud->setCreateView('test');
+        // $this->crud->setShowView('test');
+        // CRUD::setListView('test');
+
+        /* Add Widgets to all CRUD UIs */
+
+        // $widgetDefinationArray = [
+        //     'type'         => 'alert',
+        //     'class'        => 'alert alert-info mb-2',
+        //     'heading'      => 'Important information!',
+        //     'content'      => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti nulla quas distinctio veritatis provident mollitia error fuga quis repellat, modi minima corporis similique, quaerat minus rerum dolorem asperiores, odit magnam.',
+        //     'close_button' => true, // show close button or not
+        // ];
+
+        // Widget::add($widgetDefinationArray)->to('before_content');
+
+        /* Add Custom CSS & JS Files */
+        
+        // Widget::add()->type('script')->content('https://code.jquery.com/ui/1.12.0/jquery-ui.min.js');
+        // Widget::add()->type('style')
+        //     ->content('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.58/dist/themes/light.css')
+        //     ->crossorigin('anonymous');
     }
 
     /**
@@ -60,7 +87,27 @@ class CategoryCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
+        /* Add Widgets to Create UI */
+
+        $widgetDefinationArray = [
+            'type'         => 'alert',
+            'class'        => 'alert alert-info mb-2',
+            'heading'      => 'Important information!',
+            'content'      => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti nulla quas distinctio veritatis provident mollitia error fuga quis repellat, modi minima corporis similique, quaerat minus rerum dolorem asperiores, odit magnam.',
+            'close_button' => true, // show close button or not
+        ];
+
+        Widget::add($widgetDefinationArray)->to('before_content');
+
+        /* Add Custom JS */
+
+        Widget::add()->type('script')->content('https://code.jquery.com/ui/1.12.0/jquery-ui.min.js');
+
+        /* Set Request Validation File */
+
         CRUD::setValidation(CategoryRequest::class);
+
+        /* Set Table Fields */
 
         CRUD::field('parent_id');
         CRUD::field('name');
